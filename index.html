@@ -4,8 +4,14 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Python Editor</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/material-darker.min.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/material-darker.min.css"
+        />
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
@@ -13,24 +19,24 @@
             <div class="panel left-panel"></div>
             <div class="panel right-panel">
                 <div class="code-area">
-                    <textarea id="code-editor"># Write your Python code here...</textarea>
+                    <textarea id="code-editor">
+# Write your Python code here...</textarea
+                    >
                 </div>
+                <div id="output-area"></div>
                 <div class="button-container">
-                    <button type="button">Run</button>
+                    <button type="button" id="run-button">Run</button>
                 </div>
             </div>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+        <script src="js/codemirror-setup.js"></script>
+        <script src="js/pyodide-setup.js"></script>
         <script>
-            const editor = CodeMirror.fromTextArea(document.getElementById('code-editor'), {
-                mode: 'python',
-                theme: 'material-darker',
-                lineNumbers: true,
-                indentUnit: 4,
-                tabSize: 4,
-                indentWithTabs: false
-            });
+            addCodeMirror("code-editor");
+            addPyodide("editor", "run-button");
         </script>
     </body>
 </html>

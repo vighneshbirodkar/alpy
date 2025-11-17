@@ -35,11 +35,30 @@ body {
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
+    min-height: 0;
 }
 
 .CodeMirror {
     height: 100%;
     font-size: 14px;
+}
+
+#output-area {
+    background: #0d0d0d;
+    border: 1px solid #333;
+    padding: 1rem;
+    font-family: monospace;
+    font-size: 14px;
+    color: #d0d0d0;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    max-height: 200px;
+    margin-bottom: 1rem;
+    min-height: 50px;
+}
+
+#output-area:empty {
+    display: none;
 }
 
 textarea {
