@@ -13,7 +13,7 @@ print("Hello world")
 class PrintTest(unittest.TestCase):
     """Test print."""
 
-    def test_print(self) -> int:
+    def test_print(self) -> str:
         """Test print."""
         print("Hi", sys.stdout)
         self.assertEqual("", "a" + "b")
