@@ -36,10 +36,27 @@
         <script src="js/codemirror-setup.js"></script>
         <script src="js/pyodide-setup.js"></script>
         <script src="js/markdown-setup.js"></script>
+        <script src="js/io.js"></script>
+
         <script>
             editor_name = addCodeMirror("code-editor");
             addPyodide(editor_name, "run-button");
-            renderMarkdown("instruction-area", "# H1 \n ## H2");
+
+            async function loadInstructions() {
+                try {
+                    const instructionUrl =
+                        "https://raw.githubusercontent.com/geekcomputers/Python/refs/heads/master/Checker_game_by_dz/first.py"; // Change this to your URL
+                    const markdown = await downloadFileAsString(instructionUrl);
+                    renderMarkdown("instruction-area", markdown);
+                } catch (error) {
+                    renderMarkdown(
+                        "instruction-area",
+                        "# Error\n\nFailed to load instructions.",
+                    );
+                }
+            }
+
+            loadInstructions();
         </script>
     </body>
 </html>

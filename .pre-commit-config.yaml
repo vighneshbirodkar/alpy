@@ -1,0 +1,13 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.1 # Use the latest stable version of ruff-pre-commit
+    hooks:
+      - id: ruff-check
+        args: [--fix] # Optional: automatically fix linting issues
+      - id: ruff-format
+
+hooks:
+  - id: ty
+    name: ty check
+    entry: uvx ty check . --ignore unresolved-import
+    language: python
