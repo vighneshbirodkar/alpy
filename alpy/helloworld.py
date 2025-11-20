@@ -7,7 +7,7 @@ from alpy.environemt_setup import environment_setup
 
 environment_setup()
 
-print("Hello world")
+print("Hello Python!!")
 
 
 class PrintTest(unittest.TestCase):
@@ -15,8 +15,10 @@ class PrintTest(unittest.TestCase):
 
     def test_print(self) -> None:
         """Test print."""
-        print("Hi", sys.stdout)
-        self.assertEqual("", "a" + "b")
+        self.assertEqual(
+            sys.stdout.getvalue(),
+            "Hello Python!!\n",
+        )
 
 
 if __name__ == "__main__":
