@@ -20,7 +20,6 @@ select = ["ALL"]
 ignore = ["PT"]
 
 [tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["E402"]
 "src/helloworld.py" = ["E402"]
 
 "!src/**.py" = ["D"]
