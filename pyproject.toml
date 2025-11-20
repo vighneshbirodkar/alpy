@@ -20,7 +20,7 @@ select = ["ALL"]
 ignore = ["PT"]
 
 [tool.ruff.lint.per-file-ignores]
-"src/helloworld.py" = ["T201"]
+"alpy/helloworld.py" = ["T201"]
 
 [tool.ruff.format]
 quote-style = "double"

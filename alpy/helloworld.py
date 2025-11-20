@@ -1,8 +1,13 @@
 """Testing print."""
 
+import sys
 import unittest
 
-print("Hello workd")
+from alpy.environemt_setup import environment_setup
+
+environment_setup()
+
+print("Hello world")
 
 
 class PrintTest(unittest.TestCase):
@@ -10,6 +15,7 @@ class PrintTest(unittest.TestCase):
 
     def test_print(self) -> None:
         """Test print."""
+        print("Hi", sys.stdout)
         self.assertEqual("", "a" + "b")
 
 
