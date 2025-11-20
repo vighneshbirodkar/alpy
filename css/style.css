@@ -13,6 +13,7 @@
     --spacing-sm: 1rem;
     --spacing-md: 2rem;
     --border-width: 1px;
+    --success-text: #c3e88d;
 }
 
 * {
@@ -97,7 +98,8 @@ body {
     padding: 0;
 }
 
-#instruction-area ul, #instruction-area ol {
+#instruction-area ul,
+#instruction-area ol {
     margin-left: 2em;
     margin-bottom: 1em;
 }
@@ -213,4 +215,29 @@ button:hover {
 
 button:active {
     background: var(--button-bg-active);
+}
+
+.result-header {
+    padding: 0.5rem var(--spacing-sm);
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 0.5rem;
+    border-radius: 3px;
+}
+
+.result-header.pending {
+    background: #4a4a4a;
+    color: #b0b0b0;
+}
+
+.result-header.success {
+    background: #2d4a2c;
+    color: var(--success-text);
+}
+
+.result-header.error {
+    background: #4a2c2c;
+    color: #f07178;
 }

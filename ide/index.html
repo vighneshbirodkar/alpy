@@ -12,18 +12,18 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/material-darker.min.css"
         />
-        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="../css/style.css" />
     </head>
     <body>
         <div class="container">
-            <div class="panel left-panel" id="instruction-area">Instruct</div>
+            <div class="panel left-panel" id="instruction-area">Loading problem.</div>
             <div class="panel right-panel">
                 <div class="code-area">
-                    <textarea id="code-editor">
-# Write your Python code here...</textarea
+                    <textarea id="code-editor" placeholder="Enter code here."></textarea
                     >
                 </div>
-                <div id="output-area"></div>
+                <div id="result-header" class="result-header pending">Result: Pending</div>
+                <div id="output-area" ">Loading Python...</div>
                 <div class="button-container">
                     <button type="button" id="run-button">Run</button>
                 </div>
@@ -33,30 +33,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
         <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
-        <script src="js/codemirror-setup.js"></script>
-        <script src="js/pyodide-setup.js"></script>
-        <script src="js/markdown-setup.js"></script>
-        <script src="js/io.js"></script>
+        <script src="../js/codemirror-setup.js"></script>
+        <script src="../js/pyodide-setup.js"></script>
+        <script src="../js/markdown-setup.js"></script>
+        <script src="../js/io.js"></script>
 
         <script>
+
+            loadProblemInstructions();
             editor_name = addCodeMirror("code-editor");
             addPyodide(editor_name, "run-button");
-
-            async function loadInstructions() {
-                try {
-                    const instructionUrl =
-                        "https://raw.githubusercontent.com/geekcomputers/Python/refs/heads/master/Checker_game_by_dz/first.py"; // Change this to your URL
-                    const markdown = await downloadFileAsString(instructionUrl);
-                    renderMarkdown("instruction-area", markdown);
-                } catch (error) {
-                    renderMarkdown(
-                        "instruction-area",
-                        "# Error\n\nFailed to load instructions.",
-                    );
-                }
-            }
-
-            loadInstructions();
         </script>
     </body>
 </html>
