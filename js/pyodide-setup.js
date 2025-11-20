@@ -4,6 +4,7 @@ function addPyodide(editorId, buttonId) {
   const resultHeader = document.getElementById("result-header");
   const runButton = document.getElementById(buttonId);
   const editor = window[editorId];
+  const startMsg = "";
 
   async function loadPyodideInstance() {
     pyodide = await loadPyodide();
@@ -19,7 +20,7 @@ function addPyodide(editorId, buttonId) {
     });
 
     outputArea.textContent =
-      "Python ready! Your code output will appear here\n.";
+      "Python ready! Your code output will appear here\n--------\n";
   }
 
   async function runPythonWithUICallbacks() {
