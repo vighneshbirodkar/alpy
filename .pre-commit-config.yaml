@@ -6,9 +6,9 @@ repos:
         args: [--fix] # Optional: automatically fix linting issues
       - id: ruff-format
 
-local:
-  hooks:
-    - id: ty
-      name: ty check
-      entry: uvx ty check . --ignore unresolved-import
-      language: python
+  - repo: local
+    hooks:
+      - id: ty
+        name: uvx ty check
+        entry: uvx ty check .
+        language: python
