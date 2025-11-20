@@ -22,7 +22,6 @@ ignore = ["PT"]
 [tool.ruff.lint.per-file-ignores]
 "src/helloworld.py" = ["E402"]
 
-"!src/**.py" = ["D"]
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
