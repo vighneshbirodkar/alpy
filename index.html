@@ -16,7 +16,7 @@
     </head>
     <body>
         <div class="container">
-            <div class="panel left-panel"></div>
+            <div class="panel left-panel" id="instruction-area">Instruct</div>
             <div class="panel right-panel">
                 <div class="code-area">
                     <textarea id="code-editor">
@@ -32,11 +32,15 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
         <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
         <script src="js/codemirror-setup.js"></script>
         <script src="js/pyodide-setup.js"></script>
         <script>
-            addCodeMirror("code-editor");
-            addPyodide("editor", "run-button");
+            // editor_name = addCodeMirror("code-editor");
+            // addPyodide(editor_name, "run-button");
+            // document.getElementById('instruction-area').innerHTML =
+            // marked.parse('# Marked in the browser\n\nRendered by **marked**.');
+            </script>
         </script>
     </body>
 </html>

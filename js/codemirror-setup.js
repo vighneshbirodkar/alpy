@@ -8,4 +8,5 @@ function addCodeMirror(elementId) {
     indentWithTabs: false,
   });
   window.editor = editor;
+  return "editor";
 }

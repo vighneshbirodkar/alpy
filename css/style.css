@@ -1,3 +1,20 @@
+:root {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #0d0d0d;
+    --border-color: #333;
+    --text-primary: #d0d0d0;
+    --text-secondary: #a0a0a0;
+    --button-bg: #c0c0c0;
+    --button-bg-hover: #dddddd;
+    --button-bg-active: #b0b0b0;
+    --button-text: #1a1a1a;
+    --font-family: monospace;
+    --font-size-base: 14px;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --border-width: 1px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,8 +22,8 @@
 }
 
 body {
-    font-family: monospace;
-    background: #1a1a1a;
+    font-family: var(--font-family);
+    background: var(--bg-primary);
     height: 100vh;
     overflow: hidden;
 }
@@ -21,18 +38,18 @@ body {
 }
 
 .left-panel {
-    border-right: 1px solid #333;
+    border-right: var(--border-width) solid var(--border-color);
 }
 
 .right-panel {
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    padding: var(--spacing-md);
 }
 
 .code-area {
     flex: 1;
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-sm);
     display: flex;
     flex-direction: column;
     min-height: 0;
@@ -40,20 +57,20 @@ body {
 
 .CodeMirror {
     height: 100%;
-    font-size: 14px;
+    font-size: var(--font-size-base);
 }
 
 #output-area {
-    background: #0d0d0d;
-    border: 1px solid #333;
-    padding: 1rem;
-    font-family: monospace;
-    font-size: 14px;
-    color: #d0d0d0;
+    background: var(--bg-secondary);
+    border: var(--border-width) solid var(--border-color);
+    padding: var(--spacing-sm);
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
     white-space: pre-wrap;
     overflow-y: auto;
     max-height: 200px;
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-sm);
     min-height: 50px;
 }
 
@@ -64,12 +81,12 @@ body {
 textarea {
     width: 100%;
     height: 100%;
-    background: #0d0d0d;
-    color: #d0d0d0;
-    border: 1px solid #333;
-    padding: 1rem;
-    font-family: monospace;
-    font-size: 14px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: var(--border-width) solid var(--border-color);
+    padding: var(--spacing-sm);
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
     resize: none;
     outline: none;
 }
@@ -84,20 +101,20 @@ textarea::placeholder {
 }
 
 button {
-    padding: 0.75rem 2rem;
-    background: #c0c0c0;
-    color: #1a1a1a;
-    border: 1px solid #a0a0a0;
-    font-family: monospace;
-    font-size: 14px;
+    padding: 0.75rem var(--spacing-md);
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: var(--border-width) solid var(--text-secondary);
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
     cursor: pointer;
     transition: background 0.2s;
 }
 
 button:hover {
-    background: #dddddd;
+    background: var(--button-bg-hover);
 }
 
 button:active {
-    background: #b0b0b0;
+    background: var(--button-bg-active);
 }
