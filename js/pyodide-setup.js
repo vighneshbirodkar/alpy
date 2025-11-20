@@ -18,7 +18,8 @@ function addPyodide(editorId, buttonId) {
       },
     });
 
-    outputArea.textContent = "Python ready! Your code output will appear here.";
+    outputArea.textContent =
+      "Python ready! Your code output will appear here\n.";
   }
 
   async function runPythonWithUICallbacks() {
