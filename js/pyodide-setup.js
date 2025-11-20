@@ -9,12 +9,12 @@ function addPyodide(editorId, buttonId) {
     pyodide = await loadPyodide();
     pyodide.setStdout({
       batched: (msg) => {
-        outputArea.textContent = msg + "\n";
+        outputArea.textContent += msg + "\n";
       },
     });
     pyodide.setStderr({
       batched: (msg) => {
-        outputArea.textContent = msg + "\n";
+        outputArea.textContent += msg + "\n";
       },
     });
 
@@ -47,7 +47,6 @@ function addPyodide(editorId, buttonId) {
       const allCode = await downloadFileAsString(testFilePath);
       const testCode = allCode.split("TEST_BEGIN")[1];
 
-      outputArea.textContent = "";
       // For some reason making python object a bool does not work.
       await pyodide.runPythonAsync(testCode + "\npy_result = [_check()]\n");
       py_result = pyodide.globals.get("py_result").toJs();

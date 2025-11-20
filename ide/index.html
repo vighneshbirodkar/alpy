@@ -23,8 +23,10 @@
                     >
                 </div>
                 <div id="result-header" class="result-header pending">Result: Pending</div>
+
                 <div id="output-area" ">Loading Python...</div>
                 <div class="button-container">
+                    <button type="button" id="clear-button" class="clear-button">Clear</button>
                     <button type="button" id="run-button">Run</button>
                 </div>
             </div>
@@ -43,6 +45,14 @@
             loadProblemInstructions();
             editor_name = addCodeMirror("code-editor");
             addPyodide(editor_name, "run-button");
+
+            // Add clear button functionality
+            document.getElementById("clear-button").addEventListener("click", function() {
+                const outputArea = document.getElementById("output-area");
+                const resultHeader = document.getElementById("result-header");
+                outputArea.textContent = "";
+
+            });
         </script>
     </body>
 </html>

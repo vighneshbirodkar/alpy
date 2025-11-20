@@ -160,6 +160,7 @@ body {
     font-size: var(--font-size-base);
 }
 
+
 #output-area {
     background: var(--bg-secondary);
     border: var(--border-width) solid var(--border-color);
@@ -197,7 +198,8 @@ textarea::placeholder {
 
 .button-container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
 }
 
 button {
