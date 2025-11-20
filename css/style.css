@@ -39,6 +39,102 @@ body {
 
 .left-panel {
     border-right: var(--border-width) solid var(--border-color);
+    overflow-y: auto;
+    padding: var(--spacing-md);
+}
+
+#instruction-area {
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    line-height: 1.6;
+}
+
+#instruction-area h1 {
+    color: var(--text-primary);
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.3em;
+}
+
+#instruction-area h2 {
+    color: var(--text-primary);
+    font-size: 1.5em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+#instruction-area h3 {
+    color: var(--text-primary);
+    font-size: 1.25em;
+    margin-top: 1.2em;
+    margin-bottom: 0.4em;
+}
+
+#instruction-area p {
+    margin-bottom: 1em;
+}
+
+#instruction-area code {
+    background: var(--bg-secondary);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: var(--font-family);
+    font-size: 0.9em;
+}
+
+#instruction-area pre {
+    background: var(--bg-secondary);
+    padding: var(--spacing-sm);
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 1em 0;
+    border: var(--border-width) solid var(--border-color);
+}
+
+#instruction-area pre code {
+    background: none;
+    padding: 0;
+}
+
+#instruction-area ul, #instruction-area ol {
+    margin-left: 2em;
+    margin-bottom: 1em;
+}
+
+#instruction-area li {
+    margin-bottom: 0.5em;
+}
+
+#instruction-area strong {
+    font-weight: bold;
+}
+
+#instruction-area em {
+    font-style: italic;
+}
+
+#instruction-area hr {
+    border: none;
+    border-top: var(--border-width) solid var(--border-color);
+    margin: 2em 0;
+}
+
+#instruction-area blockquote {
+    border-left: 4px solid var(--border-color);
+    padding-left: 1em;
+    margin: 1em 0;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+#instruction-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+}
+
+#instruction-area a:hover {
+    opacity: 0.8;
 }
 
 .right-panel {

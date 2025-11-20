@@ -35,12 +35,11 @@
         <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
         <script src="js/codemirror-setup.js"></script>
         <script src="js/pyodide-setup.js"></script>
+        <script src="js/markdown-setup.js"></script>
         <script>
-            // editor_name = addCodeMirror("code-editor");
-            // addPyodide(editor_name, "run-button");
-            // document.getElementById('instruction-area').innerHTML =
-            // marked.parse('# Marked in the browser\n\nRendered by **marked**.');
-            </script>
+            editor_name = addCodeMirror("code-editor");
+            addPyodide(editor_name, "run-button");
+            renderMarkdown("instruction-area", "# H1 \n ## H2");
         </script>
     </body>
 </html>
