@@ -10,6 +10,8 @@
     --button-text: #1a1a1a;
     --font-family: monospace;
     --font-size-base: 14px;
+    --font-size-large: 18px;
+
     --spacing-sm: 1rem;
     --spacing-md: 2rem;
     --border-width: 1px;
@@ -240,4 +242,60 @@ button:active {
 .result-header.error {
     background: #4a2c2c;
     color: #f07178;
+}
+
+.checklist-container {
+    padding: var(--spacing-md);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.checklist-title {
+    color: var(--text-primary);
+    font-size: 3em;
+    margin-bottom: var(--spacing-sm);
+    text-align: left;
+}
+
+.checklist-subtitle {
+    font-size: 2em;
+}
+
+.problem-checklist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-left: 2em;
+}
+
+.problem-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    text-size: 100px;
+}
+
+.problem-checkbox {
+    font-size: 1rem;
+    margin-right: 0.75rem;
+    color: var(--text-secondary);
+    font-size: 1.5em;
+}
+
+.problem-checkbox.solved {
+    color: var(--success-text);
+}
+
+.problem-label {
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    font-size: 1.5em;
+    cursor: pointer;
+    text-align: left;
+    text-decoration: none;
+    flex: 1;
+}
+
+.problem-label:hover {
+    opacity: 0.8;
 }

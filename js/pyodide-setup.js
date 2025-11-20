@@ -42,12 +42,12 @@ function addPyodide(editorId, buttonId) {
         );
       }
 
-      const testFilePath = `../alpy/test_${problemName}.py`;
+      const testFilePath = `../alpy/${problemName}_test.py`;
 
       const allCode = await downloadFileAsString(testFilePath);
       const testCode = allCode.split("TEST_BEGIN")[1];
-      alert(testCode);
 
+      outputArea.textContent = "";
       // For some reason making python object a bool does not work.
       await pyodide.runPythonAsync(testCode + "\npy_result = [_check()]\n");
       py_result = pyodide.globals.get("py_result").toJs();
@@ -56,14 +56,18 @@ function addPyodide(editorId, buttonId) {
       if (result === true) {
         resultHeader.className = "result-header success";
         resultHeader.textContent = "Result: Success";
+        // Mark problem as solved in localStorage
+        localStorage.setItem(`${problemName}_solved`, "true");
       } else {
         resultHeader.className = "result-header error";
         resultHeader.textContent = "Result: Failed";
+        localStorage.setItem(`${problemName}_solved`, "false");
       }
     } catch (err) {
       outputArea.textContent = err.message;
       resultHeader.className = "result-header error";
       resultHeader.textContent = "Result: Error";
+      localStorage.setItem(`${problemName}_solved`, "false");
     }
   }
 

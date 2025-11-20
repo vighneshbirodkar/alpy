@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AlPy - Problems</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
+    </head>
+    <body>
+        <div class="checklist-container">
+            <h1 class="checklist-title">Problems</h1>
+            <h1 class="checklist-title checklist-subtitle">Basics</h1>
+
+            <ul class="problem-checklist">
+                <li class="problem-item">
+                    <i
+                        id="intro-icon"
+                        class="fa-regular fa-square problem-checkbox"
+                    ></i>
+                    <a href="/ide?problem=intro" class="problem-label"
+                        >Introduction</a
+                    >
+                </li>
+                <li class="problem-item">
+                    <i
+                        id="helloworld-icon"
+                        class="fa-regular fa-square problem-checkbox"
+                    ></i>
+                    <a href="/ide?problem=helloworld" class="problem-label"
+                        >Hello, World</a
+                    >
+                </li>
+            </ul>
+        </div>
+        <script>
+            // Update checkboxes based on localStorage
+            function updateCheckboxes() {
+                const problems = ["intro", "helloworld"];
+                problems.forEach((problem) => {
+                    const icon = document.getElementById(`${problem}-icon`);
+                    const solved =
+                        localStorage.getItem(`${problem}_solved`) === "true";
+                    if (icon) {
+                        if (solved) {
+                            icon.className =
+                                "fa-solid fa-square-check problem-checkbox solved";
+                        } else {
+                            icon.className =
+                                "fa-regular fa-square problem-checkbox";
+                        }
+                    }
+                });
+            }
+
+            // Update on page load
+            updateCheckboxes();
+
+            // Update when storage changes (e.g., from another tab)
+            window.addEventListener("storage", updateCheckboxes);
+        </script>
+    </body>
+</html>
