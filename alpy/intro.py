@@ -5,7 +5,7 @@ the computer to show things on the screen. This
 is done with the `print` function.
 
 Type the following on the right and hit run, and see what happens.
-```
+```python
 print("Hello")
 ```
 
@@ -20,14 +20,14 @@ a sequence of characters. A string can be encapsulated
 by double quotes `""` or single quotes `''`
 
 Let's print some more things. See if you can follow along on the right.
-```
+```python
 print("Hello AlPy")
 ```
 
 Instead of just printing (displaying things), we can also store
 them for later use. Here, we store the name of a friend.
 
-```
+```python
 friends_name = "Alice"
 print("Hello " + friends_name)
 ```
@@ -37,7 +37,7 @@ variable names must start with a letter, and only ever contain
 letters, numbers or an underscore(_).
 
 What would happen when we run the following code? can you guess?
-```
+```python
 friends_name = "Boris"
 friends_name = "Charu"
 print("Hello " + friends_name)
@@ -45,7 +45,7 @@ print("Hello " + friends_name)
 
 In Python, we can add strings. Below, we only add 3, but you can add as many as
 you want.
-```
+```python
 greeting = "Hello"
 name = "Dominic"
 print(greeting + " " + name)
@@ -55,13 +55,13 @@ We have only ever used one explicit function so far, `print`. There are many
 more functions that Python gives us, but for now, let's try to
 write our own. We will write a simple function called `say_hello`
 
-```
+```python
 def say_hello(name):
     print("Hello " + name + ". It is a pleasure to meet you.")
 ```
 Now we can use our function as many times as we want.
 
-```
+```python
 say_hello("Boris")
 say_hello("Alice")
 say_hello("Charu")

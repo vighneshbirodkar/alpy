@@ -37,20 +37,27 @@
                 Basics: [
                     { id: "intro", title: "Introduction" },
                     { id: "function_no_return", title: "Simple function" },
+                    { id: "numbers", title: "Numbers" },
                 ],
             };
 
             // Function to generate the checklist HTML
             function generateChecklist() {
-                const container = document.getElementById("checklist-container");
+                const container = document.getElementById(
+                    "checklist-container",
+                );
                 let html = '<h1 class="checklist-title">Exercises</h1>';
 
-                for (const [category, problemList] of Object.entries(problems)) {
+                for (const [category, problemList] of Object.entries(
+                    problems,
+                )) {
                     html += `<h1 class="checklist-title checklist-subtitle">${category}</h1>`;
                     html += '<ul class="problem-checklist">';
 
                     problemList.forEach((problem) => {
-                        const solved = localStorage.getItem(`${problem.id}_solved`) === "true";
+                        const solved =
+                            localStorage.getItem(`${problem.id}_solved`) ===
+                            "true";
                         const iconClass = solved
                             ? "fa-solid fa-square-check problem-checkbox solved"
                             : "fa-regular fa-square problem-checkbox";
@@ -72,13 +79,19 @@
             function updateCheckboxes() {
                 for (const problemList of Object.values(problems)) {
                     problemList.forEach((problem) => {
-                        const icon = document.getElementById(`${problem.id}-icon`);
-                        const solved = localStorage.getItem(`${problem.id}_solved`) === "true";
+                        const icon = document.getElementById(
+                            `${problem.id}-icon`,
+                        );
+                        const solved =
+                            localStorage.getItem(`${problem.id}_solved`) ===
+                            "true";
                         if (icon) {
                             if (solved) {
-                                icon.className = "fa-solid fa-square-check problem-checkbox solved";
+                                icon.className =
+                                    "fa-solid fa-square-check problem-checkbox solved";
                             } else {
-                                icon.className = "fa-regular fa-square problem-checkbox";
+                                icon.className =
+                                    "fa-regular fa-square problem-checkbox";
                             }
                         }
                     });
