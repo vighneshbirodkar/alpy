@@ -160,7 +160,6 @@ body {
     font-size: var(--font-size-base);
 }
 
-
 #output-area {
     background: var(--bg-secondary);
     border: var(--border-width) solid var(--border-color);
@@ -246,6 +245,26 @@ button:active {
     color: #f07178;
 }
 
+.intro-container {
+    padding: var(--spacing-md);
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+    padding-bottom: 0;
+    /*margin-bottom: var(--spacing-md);*/
+}
+
+.intro-container h1 {
+    color: var(--text-primary);
+    font-size: 3em;
+    margin-bottom: var(--spacing-sm);
+}
+
+.intro-container p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-large);
+}
+
 .checklist-container {
     padding: var(--spacing-md);
     max-width: 800px;
@@ -254,13 +273,13 @@ button:active {
 
 .checklist-title {
     color: var(--text-primary);
-    font-size: 3em;
+    font-size: 2.5em;
     margin-bottom: var(--spacing-sm);
     text-align: left;
 }
 
 .checklist-subtitle {
-    font-size: 2em;
+    font-size: 1.75em;
 }
 
 .problem-checklist {

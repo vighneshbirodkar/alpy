@@ -42,17 +42,11 @@
 
         <script>
 
-            loadProblemInstructions();
-            editor_name = addCodeMirror("code-editor");
-            addPyodide(editor_name, "run-button");
+            addCodeMirror();
+            addPyodide();
 
             // Add clear button functionality
-            document.getElementById("clear-button").addEventListener("click", function() {
-                const outputArea = document.getElementById("output-area");
-                const resultHeader = document.getElementById("result-header");
-                outputArea.textContent = "";
 
-            });
         </script>
     </body>
 </html>

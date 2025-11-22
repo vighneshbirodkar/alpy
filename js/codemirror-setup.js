@@ -1,5 +1,5 @@
-function addCodeMirror(elementId) {
-  const editor = CodeMirror.fromTextArea(document.getElementById(elementId), {
+function addCodeMirror() {
+  const editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
     mode: "python",
     theme: "material-darker",
     lineNumbers: true,
