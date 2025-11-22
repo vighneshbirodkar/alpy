@@ -2,7 +2,8 @@
 
 We learnt in the previous lesson how to define functions.
 Define a `goodbye` function, such that `goodbye("Erica")`
-should print `See you later Erica`.
+should print `See you later Erica`
+and `goodbye("Freddie")` should print `See you later Freddie`.
 
 """
 
@@ -26,9 +27,10 @@ def _check() -> bool:
     f = io.StringIO()
     with redirect_stdout(f):
         goodbye("Erica")
+        goodbye("Freddie")
     actual = f.getvalue().rstrip("\n")
     print(actual)
-    expected = "See you later Erica"
+    expected = "See you later Erica\nSee you later Freddie"
     error_msg = f"Expected `{expected}` but printed message was `{actual}`"
     assert actual == expected, error_msg  # noqa: S101
     return True

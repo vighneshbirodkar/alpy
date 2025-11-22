@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>AlPy</title>
+        <title>AlPy - Python and Algorithms</title>
         <link rel="stylesheet" href="css/style.css" />
         <link
             rel="stylesheet"
@@ -30,55 +30,63 @@
                 data, all progress will be lost.
             </p>
         </div>
-        <div class="checklist-container">
-            <h1 class="checklist-title">Exercises</h1>
-            <h1 class="checklist-title checklist-subtitle">Basics</h1>
-
-            <ul class="problem-checklist">
-                <li class="problem-item">
-                    <i
-                        id="intro-icon"
-                        class="fa-regular fa-square problem-checkbox"
-                    ></i>
-                    <a href="./ide?problem=intro" class="problem-label"
-                        >Introduction</a
-                    >
-                </li>
-                <li class="problem-item">
-                    <i
-                        id="helloworld-icon"
-                        class="fa-regular fa-square problem-checkbox"
-                    ></i>
-                    <a
-                        href="./ide?problem=function_no_return"
-                        class="problem-label"
-                        >Simple function</a
-                    >
-                </li>
-            </ul>
-        </div>
+        <div class="checklist-container" id="checklist-container"></div>
         <script>
-            // Update checkboxes based on localStorage
-            function updateCheckboxes() {
-                const problems = ["intro", "helloworld"];
-                problems.forEach((problem) => {
-                    const icon = document.getElementById(`${problem}-icon`);
-                    const solved =
-                        localStorage.getItem(`${problem}_solved`) === "true";
-                    if (icon) {
-                        if (solved) {
-                            icon.className =
-                                "fa-solid fa-square-check problem-checkbox solved";
-                        } else {
-                            icon.className =
-                                "fa-regular fa-square problem-checkbox";
-                        }
-                    }
-                });
+            // Define problems structure
+            const problems = {
+                Basics: [
+                    { id: "intro", title: "Introduction" },
+                    { id: "function_no_return", title: "Simple function" },
+                ],
+            };
+
+            // Function to generate the checklist HTML
+            function generateChecklist() {
+                const container = document.getElementById("checklist-container");
+                let html = '<h1 class="checklist-title">Exercises</h1>';
+
+                for (const [category, problemList] of Object.entries(problems)) {
+                    html += `<h1 class="checklist-title checklist-subtitle">${category}</h1>`;
+                    html += '<ul class="problem-checklist">';
+
+                    problemList.forEach((problem) => {
+                        const solved = localStorage.getItem(`${problem.id}_solved`) === "true";
+                        const iconClass = solved
+                            ? "fa-solid fa-square-check problem-checkbox solved"
+                            : "fa-regular fa-square problem-checkbox";
+
+                        html += `
+                            <li class="problem-item">
+                                <i id="${problem.id}-icon" class="${iconClass}"></i>
+                                <a href="./ide?problem=${problem.id}" class="problem-label">${problem.title}</a>
+                            </li>
+                        `;
+                    });
+
+                    html += "</ul>";
+                }
+
+                container.innerHTML = html;
             }
 
-            // Update on page load
-            updateCheckboxes();
+            function updateCheckboxes() {
+                for (const problemList of Object.values(problems)) {
+                    problemList.forEach((problem) => {
+                        const icon = document.getElementById(`${problem.id}-icon`);
+                        const solved = localStorage.getItem(`${problem.id}_solved`) === "true";
+                        if (icon) {
+                            if (solved) {
+                                icon.className = "fa-solid fa-square-check problem-checkbox solved";
+                            } else {
+                                icon.className = "fa-regular fa-square problem-checkbox";
+                            }
+                        }
+                    });
+                }
+            }
+
+            // Generate checklist on page load
+            generateChecklist();
 
             // Update when storage changes (e.g., from another tab)
             window.addEventListener("storage", updateCheckboxes);
