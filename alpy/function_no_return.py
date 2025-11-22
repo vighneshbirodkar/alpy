@@ -1,6 +1,8 @@
 """# Say Hello
 
-Define a function called `hello`. Make it print `"Hello Python!!"`
+We learnt in the previous lesson how to define functions.
+Define a `goodbye` function, such that `goodbye("Erica")`
+should print `See you later Erica`.
 
 """
 
@@ -8,9 +10,9 @@ import platform
 
 if platform.system() != "Emscripten":
 
-    def hello() -> None:
+    def goodbye(name: str) -> None:
         """Say hello."""
-        print("Hello Python!!")
+        print("See you later " + name)
 
 
 # TEST_BEGIN
@@ -23,10 +25,10 @@ from contextlib import redirect_stdout
 def _check() -> bool:
     f = io.StringIO()
     with redirect_stdout(f):
-        hello()
+        goodbye("Erica")
     actual = f.getvalue().rstrip("\n")
     print(actual)
-    expected = "Hello Python!!"
+    expected = "See you later Erica"
     error_msg = f"Expected `{expected}` but printed message was `{actual}`"
     assert actual == expected, error_msg  # noqa: S101
     return True
