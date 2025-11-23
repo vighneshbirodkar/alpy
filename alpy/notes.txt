@@ -1,0 +1,5 @@
+# Unexplained concepts
+type()
+return None
+tuples and lists
+returning tuples

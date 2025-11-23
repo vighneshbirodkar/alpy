@@ -10,9 +10,17 @@ function addPyodide() {
   const outputArea = document.getElementById("output-area");
   const resultHeader = document.getElementById("result-header");
   const runButton = document.getElementById("run-button");
-  const clearButton = document.getElementById("clear-button");
   const editor = window.editor;
   const startMsg = "Python ready! Your code output will appear here:\n";
+  outputArea.counter = 0;
+  runButton.counter = 0;
+
+  function clearOutputAreaIfStale() {
+    if (outputArea.counter < runButton.counter) {
+      outputArea.textContent = "";
+      outputArea.counter += 1;
+    }
+  }
 
   async function getPythonVariable(code, varname) {
     // Hack because pyodide cannot get single variables out.
@@ -48,11 +56,13 @@ function addPyodide() {
     pyodide = await loadPyodide();
     pyodide.setStdout({
       batched: (msg) => {
+        clearOutputAreaIfStale();
         outputArea.textContent += msg + "\n";
       },
     });
     pyodide.setStderr({
       batched: (msg) => {
+        clearOutputAreaIfStale();
         outputArea.textContent += msg + "\n";
       },
     });
@@ -68,6 +78,7 @@ function addPyodide() {
     }
 
     const code = editor.getValue();
+    runButton.counter += 1;
 
     try {
       await pyodide.runPythonAsync(code);
@@ -102,7 +113,8 @@ function addPyodide() {
         localStorage.setItem(`${problemName}_solved`, "false");
       }
     } catch (err) {
-      outputArea.textContent = err.message;
+      clearOutputAreaIfStale();
+      outputArea.textContent += err.message;
       resultHeader.className = "result-header error";
       resultHeader.textContent = "Result: Error";
       localStorage.setItem(`${problemName}_solved`, "false");
@@ -110,7 +122,6 @@ function addPyodide() {
   }
 
   runButton.addEventListener("click", runPythonWithUICallbacks);
-  clearButton.addEventListener("click", clearOutput);
 
   loadPyodideInstance();
 }

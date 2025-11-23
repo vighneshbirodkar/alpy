@@ -51,6 +51,17 @@ name = "Dominic"
 print(greeting + " " + name)
 ```
 
+Just like strings, Python can also print, store and manipulate numbers.
+Try the following
+```python
+print(35)
+a = 10
+b = 20
+c = a + b + 5
+print(c)
+```
+
+
 We have only ever used one explicit function so far, `print`. There are many
 more functions that Python gives us, but for now, let's try to
 write our own. We will write a simple function called `say_hello`
@@ -58,14 +69,20 @@ write our own. We will write a simple function called `say_hello`
 ```python
 def say_hello(name):
     print("Hello " + name + ". It is a pleasure to meet you.")
-```
-Now we can use our function as many times as we want.
 
-```python
 say_hello("Boris")
 say_hello("Alice")
 say_hello("Charu")
 ```
+`def` is short for define in Python. It is followed
+by the name of the function and a colon `:`.
+The logic of what the function does is written below
+and is indented by a fixed amount (usually 4 spaces).
+This tells the Python interpreter (the thing that runs your code)
+which piece of code belongs to the function, and which doesn't.
+In the code snippet above, we define the function and then call
+it 3 times.
+
 
 This brings us to the end of our hello, happy programming.
 

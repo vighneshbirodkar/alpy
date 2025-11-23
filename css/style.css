@@ -8,7 +8,9 @@
     --button-bg-hover: #dddddd;
     --button-bg-active: #b0b0b0;
     --button-text: #1a1a1a;
-    --font-family: monospace;
+    --font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, sans-serif;
     --font-size-base: 14px;
     --font-size-large: 18px;
 
@@ -82,7 +84,7 @@ body {
     background: var(--bg-secondary);
     padding: 0.2em 0.4em;
     border-radius: 3px;
-    font-family: var(--font-family);
+    font-family: monospace;
     font-size: 0.9em;
 }
 
@@ -93,6 +95,7 @@ body {
     overflow-x: auto;
     margin: 1em 0;
     border: var(--border-width) solid var(--border-color);
+    font-family: monospace;
 }
 
 #instruction-area pre code {
@@ -273,20 +276,20 @@ button:active {
 
 .checklist-title {
     color: var(--text-primary);
-    font-size: 2.5em;
+    font-size: 2em;
     margin-bottom: var(--spacing-sm);
     text-align: left;
 }
 
 .checklist-subtitle {
-    font-size: 1.75em;
+    font-size: 1.5em;
 }
 
 .problem-checklist {
     list-style: none;
     margin: 0;
     padding: 0;
-    margin-left: 2em;
+    margin-left: 1.5em;
 }
 
 .problem-item {
@@ -300,7 +303,7 @@ button:active {
     font-size: 1rem;
     margin-right: 0.75rem;
     color: var(--text-secondary);
-    font-size: 1.5em;
+    font-size: 1.25em;
 }
 
 .problem-checkbox.solved {
@@ -310,7 +313,7 @@ button:active {
 .problem-label {
     color: var(--text-primary);
     font-family: var(--font-family);
-    font-size: 1.5em;
+    font-size: 1.25em;
     cursor: pointer;
     text-align: left;
     text-decoration: none;
@@ -323,11 +326,13 @@ button:active {
 
 table {
     border-collapse: collapse;
+    margin: var(--spacing-sm);
 }
 tr {
     border-bottom: solid 1px var(--text-primary);
 }
-td, th {
+td,
+th {
     padding: 0.5rem 1rem;
 }
 /*tr:nth-child(even) {
