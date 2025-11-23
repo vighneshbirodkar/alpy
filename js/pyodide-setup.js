@@ -13,6 +13,16 @@ function getUrlProblem() {
   return problemName;
 }
 
+function getUrlProblemOrThrowError() {
+  const problemName = getUrlProblem();
+  if (!problemName) {
+    throw new Error(
+      "No problem specified. Please add '?problem=<problem_name>' to the URL.",
+    );
+  }
+  return problemName;
+}
+
 function setResultStatus(resultHeader, status) {
   switch (status) {
     case PythonStatus.OK:
@@ -61,19 +71,12 @@ async function getPythonVariable(pyodide, code, varname) {
 }
 
 async function loadProblemInstructions(pyodide) {
-  const problemName = getUrlProblem();
-  if (!problemName) {
-    document.getElementById("instruction-area").textContent =
-      "No problem specified. Please add '?problem=<problem_name>' to the URL.";
-    return;
-  }
-
   try {
+    const problemName = getUrlProblemOrThrowError();
     const code = await downloadFileAsString(`../alpy/${problemName}.py`);
     const docString = await getPythonVariable(pyodide, code, "__doc__");
     renderMarkdown("instruction-area", docString);
     showRunButton();
-
     if (code.includes("TEST_BEGIN")) {
       showTestButton();
     }
@@ -122,13 +125,58 @@ async function runPython(pyodide) {
   }
 }
 
-function addPyodide() {
-  let pyodide = null;
+async function testEditorCode(pyodide) {
+  const code = editor.getValue();
+  problemName = getUrlProblem();
+  await pyodide.runPythonAsync(code);
+  const filePath = `../alpy/${problemName}.py`;
+  const allCode = await downloadFileAsString(filePath);
+  const testCode = allCode.split("TEST_BEGIN")[1];
+
+  const result = await getPythonVariable(
+    pyodide,
+    testCode + "\npy_result = _test()\n",
+    "py_result",
+  );
+  return result;
+}
+
+async function testPython(pyodide) {
   const outputArea = document.getElementById("output-area");
   const resultHeader = document.getElementById("result-header");
   const runButton = document.getElementById("run-button");
+
+  if (!pyodide) {
+    outputArea.textContent = "Python is still loading, please wait...";
+    return;
+  }
+  runButton.counter += 1;
+
+  try {
+    const problemName = getUrlProblemOrThrowError();
+    const result = await testEditorCode(pyodide);
+
+    if (result === true) {
+      setResultStatus(resultHeader, PythonStatus.OK);
+      // Mark problem as solved in localStorage
+      localStorage.setItem(`${problemName}_solved`, "true");
+    } else {
+      setResultStatus(resultHeader, PythonStatus.FAILED);
+      localStorage.setItem(`${problemName}_solved`, "false");
+    }
+  } catch (err) {
+    clearOutputAreaIfStale();
+    outputArea.textContent += err.message;
+    setResultStatus(resultHeader, PythonStatus.ERROR);
+    localStorage.setItem(`${problemName}_solved`, "false");
+  }
+}
+
+function addPyodide() {
+  let pyodide = null;
+  const outputArea = document.getElementById("output-area");
+  const runButton = document.getElementById("run-button");
   const testButton = document.getElementById("test-button");
-  const editor = window.editor;
   outputArea.counter = 0;
   runButton.counter = 0;
 
@@ -141,57 +189,8 @@ function addPyodide() {
     loadProblemInstructions(pyodide);
   }
 
-  async function testPython() {
-    if (!pyodide) {
-      outputArea.textContent = "Python is still loading, please wait...";
-      return;
-    }
-
-    const code = editor.getValue();
-    runButton.counter += 1;
-
-    try {
-      await pyodide.runPythonAsync(code);
-
-      // Get problem name from URL parameter (e.g., ?problem=abc)
-      const urlParams = new URLSearchParams(window.location.search);
-      const problemName = urlParams.get("problem");
-
-      if (!problemName) {
-        throw new Error(
-          "No problem specified. Please add '?problem=<problem_name>' to the URL.",
-        );
-      }
-
-      const filePath = `../alpy/${problemName}.py`;
-
-      const allCode = await downloadFileAsString(filePath);
-      const testCode = allCode.split("TEST_BEGIN")[1];
-
-      const result = await getPythonVariable(
-        pyodide,
-        testCode + "\npy_result = _test()\n",
-        "py_result",
-      );
-
-      if (result === true) {
-        setResultStatus(resultHeader, PythonStatus.OK);
-        // Mark problem as solved in localStorage
-        localStorage.setItem(`${problemName}_solved`, "true");
-      } else {
-        setResultStatus(resultHeader, PythonStatus.FAILED);
-        localStorage.setItem(`${problemName}_solved`, "false");
-      }
-    } catch (err) {
-      clearOutputAreaIfStale();
-      outputArea.textContent += err.message;
-      setResultStatus(resultHeader, PythonStatus.ERROR);
-      localStorage.setItem(`${problemName}_solved`, "false");
-    }
-  }
-
   runButton.addEventListener("click", () => runPython(pyodide));
-  testButton.addEventListener("click", testPython);
+  testButton.addEventListener("click", () => testPython(pyodide));
 
   loadPyodideInstance();
 }
