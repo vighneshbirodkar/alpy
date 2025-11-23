@@ -10,6 +10,7 @@ function addPyodide() {
   const outputArea = document.getElementById("output-area");
   const resultHeader = document.getElementById("result-header");
   const runButton = document.getElementById("run-button");
+  const testButton = document.getElementById("test-button");
   const editor = window.editor;
   const startMsg = "Python ready! Your code output will appear here:\n";
   outputArea.counter = 0;
@@ -71,7 +72,28 @@ function addPyodide() {
     loadProblemInstructions();
   }
 
-  async function runPythonWithUICallbacks() {
+  async function runPython() {
+    if (!pyodide) {
+      outputArea.textContent = "Python is still loading, please wait...";
+      return;
+    }
+
+    const code = editor.getValue();
+    runButton.counter += 1;
+
+    try {
+      await pyodide.runPythonAsync(code);
+      resultHeader.className = "result-header pending";
+      resultHeader.textContent = "Result: Pending";
+    } catch (err) {
+      clearOutputAreaIfStale();
+      outputArea.textContent += err.message;
+      resultHeader.className = "result-header error";
+      resultHeader.textContent = "Result: Error";
+    }
+  }
+
+  async function testPython() {
     if (!pyodide) {
       outputArea.textContent = "Python is still loading, please wait...";
       return;
@@ -98,30 +120,32 @@ function addPyodide() {
       const allCode = await downloadFileAsString(filePath);
       const testCode = allCode.split("TEST_BEGIN")[1];
 
-      // For some reason making python object a bool does not work.
-      await pyodide.runPythonAsync(testCode + "\npy_result = [_check()]\n");
-      const result = pyodide.globals.get("py_result").toJs()[0];
+      const result = await getPythonVariable(
+        testCode + "\npy_result = _test()\n",
+        "py_result",
+      );
 
       if (result === true) {
         resultHeader.className = "result-header success";
-        resultHeader.textContent = "Result: Success";
+        resultHeader.textContent = "Status: OK";
         // Mark problem as solved in localStorage
         localStorage.setItem(`${problemName}_solved`, "true");
       } else {
         resultHeader.className = "result-header error";
-        resultHeader.textContent = "Result: Failed";
+        resultHeader.textContent = "Status: Failed";
         localStorage.setItem(`${problemName}_solved`, "false");
       }
     } catch (err) {
       clearOutputAreaIfStale();
       outputArea.textContent += err.message;
       resultHeader.className = "result-header error";
-      resultHeader.textContent = "Result: Error";
+      resultHeader.textContent = "Status: Error";
       localStorage.setItem(`${problemName}_solved`, "false");
     }
   }
 
-  runButton.addEventListener("click", runPythonWithUICallbacks);
+  runButton.addEventListener("click", runPython);
+  testButton.addEventListener("click", testPython);
 
   loadPyodideInstance();
 }
