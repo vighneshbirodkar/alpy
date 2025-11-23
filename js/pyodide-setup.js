@@ -28,12 +28,6 @@ function addPyodide() {
     await pyodide.runPythonAsync(code + `\n__result__ = [${varname}]\n`);
     return pyodide.globals.get("__result__").toJs()[0];
   }
-  async function clearOutput() {
-    if (!pyodide) {
-      return;
-    }
-    outputArea.textContent = startMsg;
-  }
 
   async function loadProblemInstructions() {
     const problemName = getUrlProblem();
@@ -47,6 +41,7 @@ function addPyodide() {
       const code = await downloadFileAsString(`../alpy/${problemName}.py`);
       const docString = await getPythonVariable(code, "__doc__");
       renderMarkdown("instruction-area", docString);
+      showRunButton();
     } catch (err) {
       document.getElementById("instruction-area").textContent =
         `Error loading problem instructions for "${problemName}": ${err.message}`;
@@ -142,6 +137,14 @@ function addPyodide() {
       resultHeader.textContent = "Status: Error";
       localStorage.setItem(`${problemName}_solved`, "false");
     }
+  }
+
+  function showRunButton() {
+    runButton.style.display = "inline-block";
+  }
+
+  function showTestButton() {
+    testButton.style.display = "inline-block";
   }
 
   runButton.addEventListener("click", runPython);
