@@ -37,7 +37,14 @@
             // Define problems structure
             const problems = {
                 Basics: [
+                    {
+                        id: "helloworld",
+                        title: "Hello, World",
+                        checkable: false,
+                    },
                     { id: "intro", title: "Introduction", checkable: false },
+                    { id: "intro", title: "Introduction 1", checkable: false },
+                    { id: "intro", title: "Introduction 2", checkable: false },
                 ],
                 "Advanced (work in progress)": [
                     { id: "numbers", title: "Numbers", checkable: true },
@@ -54,7 +61,7 @@
                 for (const [category, problemList, checkable] of Object.entries(
                     problems,
                 )) {
-                    html += `<h1 class="checklist-title checklist-subtitle">${category}</h1>`;
+                    html += `<h1 class="checklist-subtitle">${category}</h1>`;
                     html += '<ul class="problem-checklist">';
 
                     problemList.forEach((problem) => {

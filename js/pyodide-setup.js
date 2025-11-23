@@ -82,7 +82,7 @@ async function loadProblemInstructions(pyodide) {
     }
   } catch (err) {
     document.getElementById("instruction-area").textContent =
-      `Error loading problem instructions for "${problemName}": ${err.message}`;
+      `Error loading problem instructions for "${getUrlProblem()}": ${err.message}`;
   }
 }
 

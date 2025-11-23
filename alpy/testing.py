@@ -1,5 +1,6 @@
 """Testing utilities."""
 
+import platform
 import re
 import unittest
 from typing import TYPE_CHECKING
@@ -45,3 +46,10 @@ def create_test_class_from_md_code(docstring: str | None) -> type:
                     exec(code_block)  # noqa: S102
 
     return _DocStringCodeTest
+
+
+def create_tests_for_platform(docstring: str | None) -> type | None:
+    """Create a unit test for markdown code blocks, but not on Emscripten."""
+    if platform.system() != "Emscripten":
+        return create_test_class_from_md_code(docstring)
+    return None
