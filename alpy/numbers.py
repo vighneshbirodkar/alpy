@@ -61,7 +61,7 @@ import platform
 import unittest
 
 
-def _check() -> bool:
+def _test() -> bool:
     assert f(0) == 6, f"f(0) should be 6, but was {f(0)}"  # noqa: S101 PLR2004
     assert f(1) == 22, f"f(1) should be 22, but was {f(1)}"  # noqa: S101 PLR2004
     assert f(10) == 256, f"f(10) should be 256, but was {f(10)}"  # noqa: S101 PLR2004
@@ -69,13 +69,10 @@ def _check() -> bool:
     return True
 
 
-class TestQuadatic(unittest.TestCase):
-    """Test equation."""
+if platform.system() != "Emscripten":
+    from .testing import create_test_class_from_function
 
-    def test_quadratic(self) -> None:
-        """Test equation."""
-        _check()
-
+    NumbersTest = create_test_class_from_function(_test)
 
 if __name__ == "__main__":
     if platform.system() != "Emscripten":

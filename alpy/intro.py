@@ -87,24 +87,3 @@ it 3 times.
 This brings us to the end of our hello, happy programming.
 
 """
-
-# TEST_BEGIN
-import platform
-import unittest
-
-
-def _check() -> bool:
-    return True
-
-
-class PrintTest(unittest.TestCase):
-    """Trivial test."""
-
-    def test_noop(self) -> None:
-        """Test no op."""
-        _check()
-
-
-if __name__ == "__main__":
-    if platform.system() != "Emscripten":
-        unittest.main()
