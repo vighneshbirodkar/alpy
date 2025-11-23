@@ -277,7 +277,7 @@ button:active {
 .checklist-title {
     color: var(--text-primary);
     font-size: 2em;
-    margin-bottom: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
     text-align: left;
 }
 

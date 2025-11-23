@@ -87,3 +87,15 @@ it 3 times.
 This brings us to the end of our hello, happy programming.
 
 """
+
+import platform
+import unittest
+
+if platform.system() != "Emscripten":
+    from .testing import create_test_class_from_md_code
+
+    NumbersTest = create_test_class_from_md_code(__doc__)
+
+if __name__ == "__main__":
+    if platform.system() != "Emscripten":
+        unittest.main()

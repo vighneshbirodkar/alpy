@@ -37,8 +37,10 @@
             // Define problems structure
             const problems = {
                 Basics: [
-                    { id: "intro", title: "Introduction" },
-                    { id: "numbers", title: "Numbers" },
+                    { id: "intro", title: "Introduction", checkable: false },
+                ],
+                "Advanced (work in progress)": [
+                    { id: "numbers", title: "Numbers", checkable: true },
                 ],
             };
 
@@ -49,7 +51,7 @@
                 );
                 let html = '<h1 class="checklist-title">Exercises</h1>';
 
-                for (const [category, problemList] of Object.entries(
+                for (const [category, problemList, checkable] of Object.entries(
                     problems,
                 )) {
                     html += `<h1 class="checklist-title checklist-subtitle">${category}</h1>`;
@@ -63,9 +65,14 @@
                             ? "fa-solid fa-square-check problem-checkbox solved"
                             : "fa-regular fa-square problem-checkbox";
 
+                        const checkbox =
+                            problem.checkable !== false
+                                ? `<i id="${problem.id}-icon" class="${iconClass}"></i>`
+                                : "";
+
                         html += `
                             <li class="problem-item">
-                                <i id="${problem.id}-icon" class="${iconClass}"></i>
+                                ${checkbox}
                                 <a href="./ide?problem=${problem.id}" class="problem-label">${problem.title}</a>
                             </li>
                         `;
@@ -80,6 +87,9 @@
             function updateCheckboxes() {
                 for (const problemList of Object.values(problems)) {
                     problemList.forEach((problem) => {
+                        if (problem.checkable === false) {
+                            return;
+                        }
                         const icon = document.getElementById(
                             `${problem.id}-icon`,
                         );
